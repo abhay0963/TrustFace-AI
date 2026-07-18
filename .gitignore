@@ -14,10 +14,8 @@ env/
 models/
 ~/.insightface/
 
-# Learning Lab + Experiments generated plots (regenerate anytime by re-running the scripts)
+# Learning Lab generated plots (regenerate anytime by re-running the scripts)
 learning_lab/output/*.png
-experiments/output/*.png
-experiments/output/*.csv
 
 # Assets (demo registration images)
 assets/unknown_faces/*

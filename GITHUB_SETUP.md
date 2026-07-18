@@ -52,7 +52,7 @@ git commit -m "Add ML Trust Engine and pluggable anti-spoof model"
 git add frontend/
 git commit -m "Add web UI: dashboard, registration, live attendance, logs"
 
-git add learning_lab/ experiments/
+git add learning_lab/
 git commit -m "Add Learning Lab and Experiments (AI curriculum + ablations)"
 
 git add docs/ paper/ README.md LICENSE
