@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Live Attendance · TrustFace AI{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <div class="page-eyebrow">Module 3 + 4 — Trust Engine &amp; Presence</div>
+    <h1 class="page-title">Live Attendance</h1>
+    <p class="page-desc">Every frame is scored end-to-end: identity match → image quality → trust score → decision. Only <span style="color:var(--accent)">Auto Accept</span> events are logged as attendance.</p>
+</div>
+
+<div class="grid grid-2" style="align-items: start;">
+    <div class="card">
+        <div class="card-title">Camera Feed</div>
+        <div class="card-sub">Frames are analyzed automatically every 1.5 seconds.</div>
+
+        <div class="cam-wrap">
+            <video id="video" autoplay playsinline></video>
+            <canvas id="overlay" class="cam-overlay-canvas"></canvas>
+            <div class="cam-status"><span class="dot live" id="cam-dot"></span><span id="cam-status-text">Starting camera…</span></div>
+        </div>
+        <canvas id="capture-canvas" style="display:none;"></canvas>
+
+        <div style="display:flex; gap:10px; margin-top:16px; align-items:center;">
+            <button class="btn" id="btn-toggle">Pause Recognition</button>
+            <span class="tag-mono" id="last-run-text">—</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Trust Breakdown</div>
+        <div class="card-sub">Live decomposition of the most recently detected face.</div>
+
+        <div id="result-empty" class="empty-state">
+            <div class="icon">◉</div>No face analyzed yet. Position yourself in front of the camera.
+        </div>
+
+        <div id="result-content" style="display:none;">
+            <div style="display:flex; gap:20px; align-items:center; margin-bottom:18px;">
+                <div class="gauge-wrap">
+                    <div class="gauge">
+                        <svg width="150" height="150" viewBox="0 0 150 150">
+                            <circle cx="75" cy="75" r="64" stroke="#212b35" stroke-width="12" fill="none"/>
+                            <circle id="gauge-arc" cx="75" cy="75" r="64" stroke="#2dd4bf" stroke-width="12" fill="none"
+                                    stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"/>
+                        </svg>
+                        <div class="gauge-value">
+                            <div class="gauge-num" id="gauge-num">—</div>
+                            <div class="gauge-label">Trust</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="flex:1;">
+                    <div style="font-family: var(--font-display); font-size:19px; font-weight:700;" id="result-name">—</div>
+                    <div class="tag-mono" id="result-id" style="margin-bottom:10px;">—</div>
+                    <div id="result-decision"></div>
+                    <div class="tag-mono" style="margin-top:8px;">Similarity: <span id="result-similarity">—</span></div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="card-sub" style="margin-bottom:14px;">Sub-score contribution (each 0–100, weighted)</div>
+            <div id="subscores"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/attendance.js"></script>
+{% endblock %}

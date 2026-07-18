@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Recognition Logs · TrustFace AI{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <div class="page-eyebrow">Audit Trail + Module 3b — ML Trust Engine</div>
+    <h1 class="page-title">Recognition Logs</h1>
+    <p class="page-desc">Every recognition attempt is logged with its full feature breakdown. Label attempts below to build a training set, then train a real classifier to replace the rule-based Trust Engine.</p>
+</div>
+
+<div class="card" style="margin-bottom: 18px;">
+    <div class="card-title">ML Trust Engine — Training Status</div>
+    <div class="card-sub">A Decision Tree / Random Forest classifier trained on YOUR human-labeled attempts, evaluated on a held-out test split.</div>
+
+    <div id="ml-status-wrap" class="grid grid-4" style="margin-bottom: 16px;">
+        <div class="stat-card"><div class="stat-label">Labeled Examples</div><div class="stat-value" id="ml-labeled-count">—</div></div>
+        <div class="stat-card"><div class="stat-label">Minimum Required</div><div class="stat-value" id="ml-min-required">—</div></div>
+        <div class="stat-card"><div class="stat-label">Model Trained</div><div class="stat-value" id="ml-model-status">—</div></div>
+        <div class="stat-card"><div class="stat-label">Test Accuracy</div><div class="stat-value accent" id="ml-accuracy">—</div></div>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+        <select id="model-type-select" class="field" style="margin:0; width:auto;">
+            <option value="random_forest">Random Forest</option>
+            <option value="decision_tree">Decision Tree (printable rules)</option>
+        </select>
+        <button class="btn" id="btn-train">Train Model</button>
+        <span class="tag-mono" id="train-status-text"></span>
+    </div>
+
+    <div id="ml-metrics-detail" style="display:none;">
+        <div class="divider"></div>
+        <div class="card-sub" style="margin-bottom: 10px;">Per-class metrics (on held-out test set)</div>
+        <div id="per-class-table"></div>
+        <div class="card-sub" style="margin: 16px 0 10px;">Feature importances (Random Forest only — "which signal did the model trust most?")</div>
+        <div id="feature-importances"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Recent Events</div>
+    <div class="card-sub">Click Accept / Retry / Reject on a row to record the TRUE correct decision (ground truth for training).</div>
+    <div id="logs-table-wrap"><div class="empty-state">Loading…</div></div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/logs.js"></script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Manage Users · TrustFace AI{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <div class="page-eyebrow">Identity Registry</div>
+    <h1 class="page-title">Manage Users</h1>
+    <p class="page-desc">Every row represents one encrypted embedding stored in the database. Deleting a user permanently removes their embedding — they must re-enroll to be recognized again.</p>
+</div>
+
+<div class="card">
+    <div class="card-title">Registered Identities ({{ users|length }})</div>
+    <div class="card-sub">Sorted by most recently registered.</div>
+
+    {% if users %}
+    <table>
+        <thead>
+            <tr><th>Name</th><th>ID</th><th>Registered</th><th></th></tr>
+        </thead>
+        <tbody id="users-tbody">
+            {% for u in users %}
+            <tr data-user-id="{{ u.id }}">
+                <td>{{ u.name }}</td>
+                <td class="mono tag-mono">{{ u.external_id }}</td>
+                <td class="mono tag-mono">{{ u.created_at[:19] }}</td>
+                <td><button class="btn btn-danger btn-sm" onclick="deleteUser({{ u.id }})">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">☰</div>No users registered yet.<br>
+        <a href="/register" style="color: var(--accent);">Register your first user →</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/users.js"></script>
+{% endblock %}

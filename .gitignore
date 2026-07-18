@@ -1,0 +1,32 @@
+# Secrets - NEVER commit
+database/secret.key
+database/trustface.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.egg-info/
+
+# InsightFace model cache + trained ML Trust Engine + anti-spoof model
+models/
+~/.insightface/
+
+# Learning Lab + Experiments generated plots (regenerate anytime by re-running the scripts)
+learning_lab/output/*.png
+experiments/output/*.png
+experiments/output/*.csv
+
+# Assets (demo registration images)
+assets/unknown_faces/*
+!assets/unknown_faces/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+*.swp
+
+# Logs
+*.log

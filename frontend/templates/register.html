@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Register User · TrustFace AI{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <div class="page-eyebrow">Module 1 + 2 — Enrollment &amp; Privacy</div>
+    <h1 class="page-title">Register a New User</h1>
+    <p class="page-desc">Capture one clear, frontal frame. We compute a 512-d ArcFace embedding, encrypt it with AES-256-GCM, and store only the encrypted vector — never the raw image.</p>
+</div>
+
+<div class="grid grid-2" style="align-items: start;">
+    <div class="card">
+        <div class="card-title">Camera Capture</div>
+        <div class="card-sub">Look directly at the camera in good lighting, then click Capture.</div>
+
+        <div class="cam-wrap">
+            <video id="video" autoplay playsinline></video>
+            <canvas id="overlay" class="cam-overlay-canvas"></canvas>
+            <div class="cam-status"><span class="dot live" id="cam-dot"></span><span id="cam-status-text">Starting camera…</span></div>
+        </div>
+        <canvas id="capture-canvas" style="display:none;"></canvas>
+
+        <div style="display:flex; gap:10px; margin-top:16px;">
+            <button class="btn" id="btn-capture">Capture Frame</button>
+            <button class="btn btn-ghost" id="btn-retake" style="display:none;">Retake</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Identity Details</div>
+        <div class="card-sub">This information is stored alongside the encrypted embedding.</div>
+
+        <div id="flash" class="flash"></div>
+
+        <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="input-name" placeholder="e.g. Abhay Sharma">
+        </div>
+        <div class="field">
+            <label>ID (Roll No. / Employee ID)</label>
+            <input type="text" id="input-id" placeholder="e.g. MCA2026-014">
+        </div>
+
+        <img id="preview-img" style="width:100%; border-radius:8px; border:1px solid var(--border); display:none; margin-bottom:16px;">
+
+        <button class="btn" id="btn-submit" style="width:100%;" disabled>Encrypt &amp; Register</button>
+
+        <div class="divider"></div>
+        <p class="small-note">
+            Privacy note: the captured image is only used in-browser and in-memory on the server to compute the
+            embedding. Per <span class="tag-mono">config.SAVE_REGISTRATION_IMAGE</span>, a demo copy may be kept in
+            <span class="tag-mono">assets/</span> — disable this for a stricter privacy posture.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/register.js"></script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · TrustFace AI{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <div class="page-eyebrow">Module 5 — Dashboard</div>
+    <h1 class="page-title">System Overview</h1>
+    <p class="page-desc">Live snapshot of registered identities, today's presence, and average trust across all recognition events.</p>
+</div>
+
+<div class="grid grid-4" style="margin-bottom: 18px;">
+    <div class="card stat-card">
+        <div class="stat-label">Registered Users</div>
+        <div class="stat-value" id="stat-total-users">—</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Present Today</div>
+        <div class="stat-value accent" id="stat-present">—</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Avg. Trust Score</div>
+        <div class="stat-value" id="stat-trust">—</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Avg. Presence %</div>
+        <div class="stat-value" id="stat-presence">—</div>
+    </div>
+</div>
+
+<div class="grid grid-2" style="align-items: start;">
+    <div class="card">
+        <div class="card-title">Today's Attendance</div>
+        <div class="card-sub">Entry time, last seen, presence duration, and trust for every user seen today.</div>
+        <div id="attendance-table-wrap">
+            <div class="empty-state"><div class="icon">◈</div>Loading…</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Presence % by User</div>
+        <div class="card-sub">Time considered present vs. the configured session window.</div>
+        <div id="presence-chart" style="height: 320px;"></div>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 18px;">
+    <div class="card-title">Recent Recognition Events</div>
+    <div class="card-sub">Last 10 recognition attempts across all users (accepted, retried, rejected, or unknown).</div>
+    <div id="recent-logs-wrap">
+        <div class="empty-state"><div class="icon">▤</div>Loading…</div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

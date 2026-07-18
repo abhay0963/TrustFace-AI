@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TrustFace AI{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">TF</div>
+                <div class="brand-text">
+                    <div class="brand-name">TrustFace<span>AI</span></div>
+                    <div class="brand-sub">Presence Verification</div>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <a href="/" class="nav-item {% if active == 'dashboard' %}active{% endif %}">
+                    <span class="nav-icon">◈</span> Dashboard
+                </a>
+                <a href="/attendance" class="nav-item {% if active == 'attendance' %}active{% endif %}">
+                    <span class="nav-icon">◉</span> Live Attendance
+                </a>
+                <a href="/register" class="nav-item {% if active == 'register' %}active{% endif %}">
+                    <span class="nav-icon">＋</span> Register User
+                </a>
+                <a href="/users" class="nav-item {% if active == 'users' %}active{% endif %}">
+                    <span class="nav-icon">☰</span> Manage Users
+                </a>
+                <a href="/logs" class="nav-item {% if active == 'logs' %}active{% endif %}">
+                    <span class="nav-icon">▤</span> Recognition Logs
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="pipeline-label">Decision Pipeline</div>
+                <div class="pipeline">
+                    <span>Identity</span><i>→</i><span>Certainty</span><i>→</i><span>Trust</span><i>→</i><span>Decision</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
