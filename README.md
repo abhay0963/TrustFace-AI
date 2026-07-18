@@ -6,7 +6,7 @@
 > the harder question: *how certain am I, and should I actually trust this
 > recognition enough to act on it?*
 
-Built as an MCA project, engineered to industry standard: explainable decision
+A project, engineered to industry standard: explainable decision
 scoring, encrypted biometric storage, and presence intelligence — running
 entirely on a single laptop with open-source, open-weight tools.
 
